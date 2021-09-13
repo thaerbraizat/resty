@@ -1,3 +1,5 @@
+
+import { useState} from 'react';
 import React from 'react';
 
 import './form.scss';
@@ -6,14 +8,25 @@ import './form.scss';
 
 function Form (props){
 
+  let [method, setmethod] = useState('get');
+  let [showText,setshowText] = useState(false);
   function handleSubmit(e) {
     e.preventDefault();
     const formData = {
-      method:'GET',
-      url: 'https://pokeapi.co/api/v2/pokemon',
+      method:method,
+      url: props.urll ,
     };
    props.handleApiCall(formData);
   }
+
+  function setMethod(e){
+    setmethod(e.target.id);
+  }
+  function handleText(e){
+    setshowText(!showText);
+    setmethod(e.target.id);  
+  }
+ 
 
   return (
     <>
@@ -24,46 +37,16 @@ function Form (props){
           <button type="submit">GO!</button>
         </label>
         <label className="methods">
-          <span id="get">GET</span>
-          <span id="post">POST</span>
-          <span id="put">PUT</span>
-          <span id="delete">DELETE</span>
+          <span style={{background:"red"}} name="GET" id="get" onClick={setMethod}>GET</span>
+          <span style={{background:"blue"}} name="post"  id="post" onClick={handleText}>POST</span>
+          <span style={{background:"orange"}} name="put" id="put" onClick={handleText}>PUT</span>
+          <span style={{background:"pink"}} name="delete" id="delete" onClick={setMethod}>DELETE</span>
         </label>
+
+        {showText && <textarea name="space" rows="20" cols="30" />}
       </form>
     </>
   )
 }
-
-// class Form extends React.Component {
-
-//   handleSubmit = e => {
-//     e.preventDefault();
-//     const formData = {
-//       method:'GET',
-//       url: 'https://pokeapi.co/api/v2/pokemon',
-//     };
-//     this.props.handleApiCall(formData);
-//   }
-
-//   render() {
-//     return (
-//       <>
-//         <form onSubmit={this.handleSubmit}>
-//           <label >
-//             <span>URL: </span>
-//             <input name='url' type='text' />
-//             <button type="submit">GO!</button>
-//           </label>
-//           <label className="methods">
-//             <span id="get">GET</span>
-//             <span id="post">POST</span>
-//             <span id="put">PUT</span>
-//             <span id="delete">DELETE</span>
-//           </label>
-//         </form>
-//       </>
-//     );
-//   }
-// }
 
 export default Form;

@@ -16,15 +16,18 @@ class App extends React.Component {
     this.state = {
       data: null,
       requestParams: {},
-      inputData:""
+      urll:"",
+     
     };
   }
 
   takeInput = (e)=> {
     this.setState({
-      inputData : e.target.value
+      urll : e.target.value
     })
   }
+
+
 
   callApi = (requestParams) => {
     // mock output
@@ -43,8 +46,8 @@ class App extends React.Component {
       <React.Fragment>
         <Header />
         <div>Request Method: {this.state.requestParams.method}</div>
-        <div>URL: {this.state.requestParams.url} &nbsp;&nbsp;&nbsp;{this.state.inputData} </div>
-        <Form handleApiCall={this.callApi} takeInput={this.takeInput}/>
+        <div>URL:{this.state.urll} </div>
+        <Form handleApiCall={this.callApi} takeInput={this.takeInput} urll={this.state.urll}/>
         <Results data={this.state.data} />
         <Footer />
       </React.Fragment>
