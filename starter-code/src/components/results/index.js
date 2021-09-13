@@ -1,22 +1,15 @@
 import React from 'react';
-
+import Loading from '../loading/Loading';
+import JSONPretty from 'react-json-pretty';
+import 'react-json-pretty/themes/monikai.css';
 function Results(props){
   return (
     <section>
-      <pre>{props.data ? JSON.stringify(props.data, undefined, 2) : null}</pre>
-      
+
+      { props.data ?<JSONPretty data-testid="data" data={props.data}></JSONPretty>  :  <Loading/>}
     </section>
   );
 }
 
-// class Results extends React.Component {
-//   render() {
-//     return (
-//       <section>
-//         <pre>{this.props.data ? JSON.stringify(this.props.data, undefined, 2) : null}</pre>
-//       </section>
-//     );
-//   }
-// }
 
 export default Results;
