@@ -6,7 +6,8 @@ function Results(props){
   return (
     <section>
 
-      { props.data ?<JSONPretty data-testid="data" data={props.data}></JSONPretty>  :  <Loading/>}
+      { props.data ?<JSONPretty data-testid="data" data={props.data}></JSONPretty> : <Loading/>}
+  
     </section>
   );
 }
